@@ -1,5 +1,6 @@
 import express from 'express';
 import SERVER from './schema';
+import models from './models';
 
 const APP = express();
 
@@ -9,13 +10,11 @@ SERVER.applyMiddleware({
 });
 
 // Express: Port
-const PORT = 4000 || process.env;
+const PORT = 4000;
 
 // Express: Listener
-APP.listen(PORT, () => {
-  console.log(`The server has started on port: ${PORT}`);
-  console.log(`http://localhost:${PORT}/graphql`);
+models.sequelize.sync().then(() => {
+  APP.listen();
 });
-
 
 export default APP;
