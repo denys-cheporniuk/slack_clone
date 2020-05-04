@@ -9,11 +9,8 @@ SERVER.applyMiddleware({
   app: APP,
 });
 
-// Express: Port
-const PORT = 4000;
-
 // Express: Listener
-models.sequelize.sync().then(() => {
+models.sequelize.sync({ force: true }).then(() => {
   APP.listen();
 });
 
